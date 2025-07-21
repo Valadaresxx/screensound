@@ -1,9 +1,18 @@
 package br.com.valadares.screensound.principal;
 
+import br.com.valadares.screensound.repository.ArtistaRepository;
+
 import java.util.Scanner;
 
 public class Principal {
+
+    private final ArtistaRepository repositorio;
     public Scanner leitura = new Scanner(System.in);
+
+    public Principal(ArtistaRepository repositorio) {
+        this.repositorio = repositorio;
+    }
+
     public void exibiMenu() {
         var opcao = -1;
 
