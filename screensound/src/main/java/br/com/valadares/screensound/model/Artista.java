@@ -8,14 +8,18 @@ import java.util.List;
 @Entity
 @Table(name = "artistas")
 public class Artista {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true)
     private String nome;
+
     @Enumerated(EnumType.STRING)
     private TipoArtista tipo;
-    @OneToMany
+    
+    @OneToMany(mappedBy = "artista")
     private List<Musica> musicas = new ArrayList<>();
 
     public Long getId() {
@@ -53,7 +57,7 @@ public class Artista {
     @Override
     public String toString() {
         return  "Artista - " + nome + '\'' +
-                ", tipo - " + tipo +
-                ", musicaList=" + musicas;
+                ", Tipo - " + tipo +
+                ", Musicas - " + musicas;
     }
 }
