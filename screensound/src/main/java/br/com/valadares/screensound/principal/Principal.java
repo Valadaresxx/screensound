@@ -1,5 +1,7 @@
 package br.com.valadares.screensound.principal;
 
+import br.com.valadares.screensound.model.Artista;
+import br.com.valadares.screensound.model.TipoArtista;
 import br.com.valadares.screensound.repository.ArtistaRepository;
 
 import java.util.Scanner;
@@ -16,7 +18,7 @@ public class Principal {
     public void exibiMenu() {
         var opcao = -1;
 
-        while(opcao != 0){
+        while (opcao != 0) {
             var texto = """
                      -_- Menu de opções -_-
                     
@@ -31,7 +33,7 @@ public class Principal {
             opcao = leitura.nextInt();
             leitura.nextLine();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     cadastrarArtista();
                     break;
@@ -55,6 +57,22 @@ public class Principal {
     }
 
     private void cadastrarArtista() {
+        var cadastrarNovo = "S";
+
+        while (cadastrarNovo.equalsIgnoreCase("S")) {
+            System.out.println("Digite o nome do artista que deseja cadastrar:");
+            var nome = leitura.nextLine();
+
+            System.out.println("Escolha qual o tipo do artista: (solo, dupla, banda");
+            var tipo = leitura.nextLine();
+
+            TipoArtista tipoArtista = TipoArtista.valueOf(tipo.toUpperCase());
+            Artista artista = new Artista(nome, tipoArtista);
+            repositorio.save(artista);
+
+            System.out.println("Deseja cadastrar outro artistas? S/N");
+            cadastrarNovo = leitura.nextLine();
+        }
     }
 
     private void cadastrarMusica() {

@@ -18,9 +18,14 @@ public class Artista {
 
     @Enumerated(EnumType.STRING)
     private TipoArtista tipo;
-    
+
     @OneToMany(mappedBy = "artista")
     private List<Musica> musicas = new ArrayList<>();
+
+    public Artista(String nome, TipoArtista tipoArtista) {
+        this.nome = nome;
+        this.tipo = tipoArtista;
+    }
 
     public Long getId() {
         return id;
