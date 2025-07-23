@@ -1,9 +1,12 @@
 package br.com.valadares.screensound.principal;
 
 import br.com.valadares.screensound.model.Artista;
+import br.com.valadares.screensound.model.Musica;
 import br.com.valadares.screensound.model.TipoArtista;
 import br.com.valadares.screensound.repository.ArtistaRepository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Principal {
@@ -76,6 +79,19 @@ public class Principal {
     }
 
     private void cadastrarMusica() {
+        System.out.println("Cadastrar musica de qual artista? ");
+        var nome = leitura.nextLine();
+        Optional<Artista> artista = repositorio.findByNomeContainingIgnoreCase(nome);
+        if(artista.isPresent()){
+            System.out.printf("Digite o nome da musica: ");
+            var nomeMusica = leitura.nextLine();
+            Musica musica = new Musica(nomeMusica);
+            musica.setArtista(artista.get());
+            artista.get().getMusicaList().add(musica);
+            repositorio.save(artista.get());
+        }else{
+            System.out.println("Artista não encontrado!");
+        }
     }
 
     private void listarMusicas() {
