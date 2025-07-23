@@ -51,6 +51,6 @@ public class Musica {
     public String toString() {
         return "Musica - " +
                 " Titulo - " + titulo + '\'' +
-                " Artista - " + artista;
+                " Artista - " + artista.getNome();
     }
 }
